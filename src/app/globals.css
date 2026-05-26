@@ -1,26 +1,230 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ===== LIGHT THEME (default) ===== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #2d6a4f;
+  --color-primary-light: #40916c;
+  --color-accent: #d97706;
+  --color-accent-dark: #b45309;
+
+  --color-bg: #f4faf6;
+  --color-bg-2: #ffffff;
+  --color-text: #0b1a0f;
+  --color-text-muted: rgba(11, 26, 15, 0.72);
+  --color-text-dim: rgba(11, 26, 15, 0.5);
+  --color-glass: rgba(255, 255, 255, 0.92);
+  --color-glass-border: rgba(45, 106, 79, 0.18);
+  --color-overlay-from: rgba(244, 252, 247, 0.95);
+  --color-overlay-mid: rgba(240, 250, 245, 0.92);
+  --color-overlay-to: rgba(236, 248, 242, 0.99);
+  --color-light-mint: #2d6a4f;
+  --color-light-mint-2: #40916c;
+  --color-red: #dc2626;
+  --color-green: #16a34a;
+  --shadow: 0 10px 40px rgba(45, 106, 79, 0.12);
+  --bg-filter: brightness(1.1) saturate(0.3) contrast(0.85);
+}
+
+/* ===== DARK THEME ===== */
+.dark {
+  --color-accent: #f59e0b;
+  --color-accent-dark: #d97706;
+  --color-bg: #0b1a0f;
+  --color-bg-2: #132a19;
+  --color-text: #ecfdf5;
+  --color-text-muted: rgba(255, 255, 255, 0.6);
+  --color-text-dim: rgba(255, 255, 255, 0.45);
+  --color-glass: rgba(11, 26, 15, 0.65);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-overlay-from: rgba(11, 26, 15, 0.65);
+  --color-overlay-mid: rgba(11, 26, 15, 0.45);
+  --color-overlay-to: rgba(11, 26, 15, 0.98);
+  --color-light-mint: #ecfdf5;
+  --color-light-mint-2: #a7f3d0;
+  --color-red: #ef4444;
+  --color-green: #22c55e;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --bg-filter: brightness(0.85) saturate(1.1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--color-primary);
+  --color-primary-light: var(--color-primary-light);
+  --color-accent: var(--color-accent);
+  --color-accent-dark: var(--color-accent-dark);
+  --color-bg: var(--color-bg);
+  --color-bg-2: var(--color-bg-2);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-dim: var(--color-text-dim);
+  --color-glass: var(--color-glass);
+  --color-glass-border: var(--color-glass-border);
+  --color-mint: var(--color-light-mint);
+  --color-mint-2: var(--color-light-mint-2);
+  --color-up: var(--color-green);
+  --color-down: var(--color-red);
+  --font-display: var(--font-baloo), cursive;
+  --font-sans: var(--font-poppins), sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), sans-serif;
+  color: var(--color-text);
+  background: var(--color-bg);
+  overflow-x: hidden;
+  line-height: 1.7;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* ===== BACKGROUND IMAGE FILTER ===== */
+.bg-image {
+  filter: var(--bg-filter);
+}
+
+/* ===== PARTICLES ===== */
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(40px) scale(1);
+    opacity: 0;
+  }
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(167, 243, 208, 0.35);
+  border-radius: 50%;
+  animation: floatUp linear infinite;
+}
+
+:root:not(.dark) .particle {
+  background: rgba(45, 106, 79, 0.35);
+}
+
+/* ===== SCROLL INDICATOR ===== */
+@keyframes scrollWheel {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce 2s ease infinite;
+}
+
+.scroll-wheel {
+  animation: scrollWheel 1.5s ease infinite;
+}
+
+/* ===== ANIMATE ON SCROLL ===== */
+.animate-init {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-init.fade-up {
+  transform: translateY(40px);
+}
+.animate-init.fade-left {
+  transform: translateX(-40px);
+}
+.animate-init.fade-right {
+  transform: translateX(40px);
+}
+.animate-init.zoom-in {
+  transform: scale(0.9);
+}
+
+.animate-init.visible {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+/* ===== FORM PLACEHOLDER ===== */
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--color-text-dim);
+}
+
+.form-select option {
+  background: var(--color-bg-2);
+  color: var(--color-text);
+}
+
+/* ===== SELECTION ===== */
+::selection {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+}
+
+/* ===== SCHEME BADGE (rotated corner ribbon) ===== */
+.scheme-badge {
+  position: absolute;
+  top: 16px;
+  right: -28px;
+  color: #0b1a0f;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 36px;
+  transform: rotate(45deg);
+  z-index: 1;
 }
