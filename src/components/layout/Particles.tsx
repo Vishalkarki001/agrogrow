@@ -17,7 +17,7 @@ export function Particles({ count = 30 }: { count?: number }) {
       left: `${Math.random() * 100}%`,
       duration: `${10 + Math.random() * 15}s`,
       delay: `${Math.random() * 10}s`,
-      size: `${3 + Math.random() * 4}px`,
+      size: `${5 + Math.random() * 4}px`,
     }));
     setParticles(items);
   }, [count]);
