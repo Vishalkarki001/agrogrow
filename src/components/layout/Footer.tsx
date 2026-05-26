@@ -1,17 +1,4 @@
-import {
-  FaFacebookF,
-  FaYoutube,
-  FaWhatsapp,
-  FaInstagram,
-  FaSeedling,
-} from "react-icons/fa6";
-
-const socials = [
-  { Icon: FaFacebookF, href: "#" },
-  { Icon: FaYoutube, href: "#" },
-  { Icon: FaWhatsapp, href: "#" },
-  { Icon: FaInstagram, href: "#" },
-];
+import { FaSeedling } from "react-icons/fa6";
 
 export function Footer() {
   return (
@@ -22,25 +9,13 @@ export function Footer() {
             <FaSeedling className="text-accent" />
             <span>AgroGrow</span>
           </div>
-          <p className="text-text-dim text-sm mb-5">
+          <p className="text-text-dim text-sm">
             Empowering Indian Agriculture Digitally. Jai Jawan, Jai Kisan.
           </p>
-          <div className="flex justify-center gap-3.5">
-            {socials.map(({ Icon, href }, i) => (
-              <a
-                key={i}
-                href={href}
-                aria-label="social"
-                className="w-10 h-10 rounded-full border border-glass-border flex items-center justify-center text-text-dim hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all duration-300 hover:shadow-[0_4px_15px_rgba(245,158,11,0.2)]"
-              >
-                <Icon />
-              </a>
-            ))}
-          </div>
         </div>
         <div className="text-center pt-6 border-t border-glass-border">
           <p className="text-xs text-text-dim">
-            &copy; 2024 AgroGrow. All Rights Reserved.
+            &copy; 2026 AgroGrow. All Rights Reserved.
           </p>
         </div>
       </div>
