@@ -108,11 +108,13 @@ body {
 
 .particle {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 4px;
   height: 4px;
   background: rgba(167, 243, 208, 0.35);
   border-radius: 50%;
-  animation: floatUp linear infinite;
+  animation: floatUp linear infinite both;
 }
 
 :root:not(.dark) .particle {
